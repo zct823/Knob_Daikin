@@ -133,6 +133,8 @@ open class Knob: UIControl {
   /// back to `false` once the event ends.
   public private(set) var manipulating = false
 
+    public var trackRadius: CGFloat { return expanse / 2 - trackLineWidth }
+
   /**
    The starting angle of the arc where a value of 0.0 is located. Arc angles are explained in the UIBezier
    documentation for init(arcCenter:radius:startAngle:endAngle:clockwise:). In short, a value of 0.0 will start on
@@ -382,7 +384,7 @@ extension Knob {
   }
 
   private func createRing() -> UIBezierPath {
-    .init(arcCenter: CGPoint.zero, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+    .init(arcCenter: CGPoint.zero, radius: trackRadius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
   }
 
   private func createIndicator() {
