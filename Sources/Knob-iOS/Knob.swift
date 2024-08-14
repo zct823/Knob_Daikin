@@ -263,7 +263,7 @@ extension Knob {
       progressLayer.lineWidth = progressLineWidth
       progressLayer.strokeColor = progressColor.cgColor
       progressLayer.path = createRing().cgPath
-      progressLayer.strokeEnd = CGFloat((value - minimumValue) / (maximumValue - minimumValue))
+      //progressLayer.strokeEnd = CGFloat((value - minimumValue) / (maximumValue - minimumValue))
     } else if layer === ticksLayer {
       ticksLayer.lineWidth = tickLineWidth
       ticksLayer.strokeColor = tickColor.cgColor
@@ -391,7 +391,9 @@ extension Knob {
   }
 
   private func createRing() -> UIBezierPath {
-    .init(arcCenter: CGPoint.zero, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+      let path = UIBezierPath.init()
+      path.addArc(withCenter: CGPoint.zero, radius: self.radius, startAngle: self.startAngle, endAngle: self.endAngle, clockwise: true)
+      return path
   }
 
   private func createIndicator() {
