@@ -391,7 +391,7 @@ extension Knob {
   }
 
   private func createRing() -> UIBezierPath {
-      let path = UIBezierPath.init(roundedRect: CGRectZero, cornerRadius: 0.5)
+      let path = UIBezierPath.init()
       path.addArc(
         withCenter: CGPoint.zero,
         radius: self.radius,
