@@ -391,7 +391,7 @@ extension Knob {
   }
 
   private func createRing() -> UIBezierPath {
-    .init(arcCenter: CGPoint.zero, radius: _trackRadius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+    .init(arcCenter: CGPoint.zero, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
   }
 
   private func createIndicator() {
