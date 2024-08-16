@@ -403,13 +403,17 @@ extension Knob {
       indicator.apply(.init(rotationAngle: angleForNormalizedValue))
       indicatorLayer.path = indicator.cgPath
 
-      self.indicatorLayer.shadowColor = UIColor.init(red: 233, green: 233, blue: 233, alpha: 1).cgColor
-      self.indicatorLayer.shadowOffset = CGSize(width: 0.0, height: 2.8)
-      self.indicatorLayer.shadowOpacity = 1.0
-      self.indicatorLayer.shadowRadius = 0.0
-      self.indicatorLayer.shouldRasterize = true
+      let shadowLayer = CAShapeLayer()
+      shadowLayer.path = self.indicatorLayer.path
+      shadowLayer.shadowColor = UIColor.init(red: 233, green: 233, blue: 233, alpha: 1).cgColor
+      shadowLayer.shadowOffset = CGSize(width: 0.0, height: 2.8)
+      shadowLayer.shadowOpacity = 1.0
+      shadowLayer.shadowRadius = 0.0
+      shadowLayer.shouldRasterize = true
+      shadowLayer.rasterizationScale = UIScreen.main.scale
+      
       self.indicatorLayer.rasterizationScale = UIScreen.main.scale
-      self.indicatorLayer.addSublayer(self.indicatorLayer)
+      self.indicatorLayer.addSublayer(shadowLayer)
   }
 
   private func createTicks() {
