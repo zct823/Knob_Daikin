@@ -396,7 +396,7 @@ extension Knob {
 
         self.layer.addSublayer(firstLayer)
 
-        var shadowLayer: CAShapeLayer!
+        let shadowLayer: CAShapeLayer = CAShapeLayer()
         var secondLayer: CALayer!
 
         for layerTwo in [indicatorLayer] {
