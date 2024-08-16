@@ -369,26 +369,29 @@ extension Knob {
 extension Knob {
 
   private func initialize() {
-    setContentHuggingPriority(.defaultHigh, for: .horizontal)
-    setContentHuggingPriority(.defaultHigh, for: .vertical)
+        setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        setContentHuggingPriority(.defaultHigh, for: .vertical)
 
-    setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-    setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        setContentCompressionResistancePriority(.defaultLow, for: .vertical)
 
-    for layer in [trackLayer, ticksLayer, progressLayer, indicatorLayer] {
-      self.layer.addSublayer(layer)
-      layer.needsDisplayOnBoundsChange = true
-      layer.delegate = layerDelegate
-      layer.fillColor = UIColor.clear.cgColor
-      layer.backgroundColor = UIColor.clear.cgColor
-      layer.allowsEdgeAntialiasing = true
-      layer.lineCap = .round
-      layer.strokeStart = 0.0
-    }
+        for layer in [trackLayer, ticksLayer, progressLayer, indicatorLayer] {
+            self.layer.addSublayer(layer)
+            layer.needsDisplayOnBoundsChange = true
+            layer.delegate = layerDelegate
+            layer.fillColor = UIColor.clear.cgColor
+            layer.backgroundColor = UIColor.clear.cgColor
+            layer.allowsEdgeAntialiasing = true
+            layer.lineCap = .round
+            layer.strokeStart = 0.0
+            layer.rasterizationScale = self.window?.windowScene?.screen.scale ?? UIScreen.main.scale
+        }
 
-    trackLayer.strokeEnd = 1.0
-    progressLayer.strokeEnd = 0.0
-    indicatorLayer.strokeEnd = 1.0
+          //self.layer.addSublayer(self.indicatorLayer)
+
+        trackLayer.strokeEnd = 1.0
+        progressLayer.strokeEnd = 0.0
+        indicatorLayer.strokeEnd = 1.0
   }
 
   private func createRing() -> UIBezierPath {
