@@ -391,7 +391,7 @@ extension Knob {
             layer.allowsEdgeAntialiasing = true
             layer.lineCap = .round
             layer.strokeStart = 0.0
-            layer.rasterizationScale = self.window?.windowScene?.screen.scale ?? UIScreen.main.scale
+            //layer.rasterizationScale = self.window?.windowScene?.screen.scale ?? UIScreen.main.scale
         }
 
         self.layer.addSublayer(firstLayer)
@@ -408,7 +408,7 @@ extension Knob {
             layerTwo.allowsEdgeAntialiasing = true
             layerTwo.lineCap = .round
             layerTwo.strokeStart = 0.0
-            layerTwo.rasterizationScale = self.window?.windowScene?.screen.scale ?? UIScreen.main.scale
+            //layerTwo.rasterizationScale = UIScreen.main.scale
 
             shadowLayer.shadowColor = UIColor.black.cgColor
             shadowLayer.shadowRadius = 8.0
