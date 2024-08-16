@@ -402,18 +402,23 @@ extension Knob {
       indicator.addLine(to: CGPoint(x: radius * (1.0 - indicatorLineLength), y: 0.0))
       indicator.apply(.init(rotationAngle: angleForNormalizedValue))
       indicatorLayer.path = indicator.cgPath
+      self.indicatorLayer.rasterizationScale = UIScreen.main.scale
 
       let shadowLayer = CAShapeLayer()
-      shadowLayer.path = self.indicatorLayer.path
+      let shadowMaskPath = UIBezierPath(roundedRect: self.indicatorLayer.bounds,
+                                        byRoundingCorners: [.topLeft, .bottomLeft, .bottomRight],
+                                        cornerRadii: CGSize(width: 8, height: 8))
+      shadowLayer.frame = self.indicatorLayer.bounds
+      shadowLayer.path = shadowMaskPath.cgPath
+
+      self.indicatorLayer.insertSublayer(shadowLayer, at: 0)
+
       shadowLayer.shadowColor = UIColor.init(red: 233, green: 233, blue: 233, alpha: 1).cgColor
       shadowLayer.shadowOffset = CGSize(width: 0.0, height: 2.8)
       shadowLayer.shadowOpacity = 1.0
       shadowLayer.shadowRadius = 0.0
       shadowLayer.shouldRasterize = true
       shadowLayer.rasterizationScale = UIScreen.main.scale
-      
-      self.indicatorLayer.rasterizationScale = UIScreen.main.scale
-      self.indicatorLayer.addSublayer(shadowLayer)
   }
 
   private func createTicks() {
