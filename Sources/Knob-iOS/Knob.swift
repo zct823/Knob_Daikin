@@ -272,6 +272,7 @@ extension Knob {
       indicatorLayer.lineWidth = indicatorLineWidth
       indicatorLayer.strokeColor = indicatorColor.cgColor
       createIndicator()
+
     }
   }
 }
@@ -402,23 +403,11 @@ extension Knob {
       indicator.addLine(to: CGPoint(x: radius * (1.0 - indicatorLineLength), y: 0.0))
       indicator.apply(.init(rotationAngle: angleForNormalizedValue))
       indicatorLayer.path = indicator.cgPath
-      self.indicatorLayer.rasterizationScale = UIScreen.main.scale
-
-      let shadowLayer = CAShapeLayer()
-      let shadowMaskPath = UIBezierPath(roundedRect: self.indicatorLayer.bounds,
-                                        byRoundingCorners: [.topLeft, .bottomLeft, .bottomRight],
-                                        cornerRadii: CGSize(width: 8, height: 8))
-      shadowLayer.frame = self.indicatorLayer.bounds
-      shadowLayer.path = shadowMaskPath.cgPath
-
-      self.indicatorLayer.insertSublayer(shadowLayer, at: 0)
-
-      shadowLayer.shadowColor = UIColor.init(red: 233, green: 233, blue: 233, alpha: 1).cgColor
-      shadowLayer.shadowOffset = CGSize(width: 0.0, height: 2.8)
-      shadowLayer.shadowOpacity = 1.0
-      shadowLayer.shadowRadius = 0.0
-      shadowLayer.shouldRasterize = true
-      shadowLayer.rasterizationScale = UIScreen.main.scale
+      self.indicatorLayer.shadowPath = indicator.cgPath
+      self.indicatorLayer.shadowColor = UIColor.red.cgColor
+      self.indicatorLayer.shadowRadius = 25.0
+      self.indicatorLayer.shadowOpacity = 1.0
+      self.indicatorLayer.shadowOffset = CGSize(width: 1.0, height: 1.0)
   }
 
   private func createTicks() {
@@ -434,5 +423,28 @@ extension Knob {
     ticksLayer.path = ticks.cgPath
   }
 }
+
+extension UIView {
+    func renderCircle() {
+        let semiCircleLayer = CAShapeLayer()
+
+        let center = CGPoint (x: self.frame.size.width / 2, y: self.frame.size.height / 2)
+        let circleRadius = self.frame.size.width / 2
+        let circlePath = UIBezierPath(arcCenter: center, radius: circleRadius, startAngle: CGFloat(Double.pi * 2), endAngle: CGFloat(Double.pi), clockwise: true)
+
+        semiCircleLayer.path = circlePath.cgPath
+        semiCircleLayer.strokeColor = UIColor.red.cgColor
+        semiCircleLayer.fillColor = UIColor.clear.cgColor
+        semiCircleLayer.lineWidth = 8
+        semiCircleLayer.shadowColor = UIColor.red.cgColor
+        semiCircleLayer.shadowRadius = 25.0
+        semiCircleLayer.shadowOpacity = 1.0
+        semiCircleLayer.shadowPath = circlePath.cgPath.copy(strokingWithWidth: 25, lineCap: .round, lineJoin: .miter, miterLimit: 0)
+
+        semiCircleLayer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        self.layer.addSublayer(semiCircleLayer)
+    }
+}
+
 
 #endif
