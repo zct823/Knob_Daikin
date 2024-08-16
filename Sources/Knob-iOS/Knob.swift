@@ -397,11 +397,19 @@ extension Knob {
   }
 
   private func createIndicator() {
-    let indicator = UIBezierPath()
-    indicator.move(to: CGPoint(x: radius, y: 0.0))
-    indicator.addLine(to: CGPoint(x: radius * (1.0 - indicatorLineLength), y: 0.0))
-    indicator.apply(.init(rotationAngle: angleForNormalizedValue))
-    indicatorLayer.path = indicator.cgPath
+      let indicator = UIBezierPath()
+      indicator.move(to: CGPoint(x: radius, y: 0.0))
+      indicator.addLine(to: CGPoint(x: radius * (1.0 - indicatorLineLength), y: 0.0))
+      indicator.apply(.init(rotationAngle: angleForNormalizedValue))
+      indicatorLayer.path = indicator.cgPath
+
+      self.indicatorLayer.shadowColor = UIColor.init(red: 233, green: 233, blue: 233, alpha: 1).cgColor
+      self.indicatorLayer.shadowOffset = CGSize(width: 0.0, height: 2.8)
+      self.indicatorLayer.shadowOpacity = 1.0
+      self.indicatorLayer.shadowRadius = 0.0
+      self.indicatorLayer.shouldRasterize = true
+      self.indicatorLayer.rasterizationScale = UIScreen.main.scale
+      self.indicatorLayer.addSublayer(self.indicatorLayer)
   }
 
   private func createTicks() {
