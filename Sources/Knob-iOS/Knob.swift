@@ -415,6 +415,7 @@ extension Knob {
         trackLayer.strokeEnd = 1.0
         progressLayer.strokeEnd = 0.0
         indicatorLayer.strokeEnd = 1.0
+        self.indicatorLayer.strokeColor = UIColor.black.cgColor
     }
 
     private func createRing() -> UIBezierPath {
@@ -429,11 +430,6 @@ extension Knob {
         indicator.addLine(to: CGPoint(x: radius * (1.0 - indicatorLineLength), y: 0.0))
         indicator.apply(.init(rotationAngle: angleForNormalizedValue))
         indicatorLayer.path = indicator.cgPath
-        self.indicatorLayer.shadowPath = indicator.cgPath
-        self.indicatorLayer.shadowColor = UIColor.red.cgColor
-        self.indicatorLayer.shadowRadius = 25.0
-        self.indicatorLayer.shadowOpacity = 1.0
-        self.indicatorLayer.shadowOffset = CGSize(width: 1.0, height: 1.0)
     }
 
     private func createTicks() {
