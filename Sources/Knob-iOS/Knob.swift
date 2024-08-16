@@ -396,6 +396,7 @@ extension Knob {
 
         self.layer.addSublayer(firstLayer)
 
+        var shadowLayer: CAShapeLayer!
         var secondLayer: CALayer!
 
         for layerTwo in [indicatorLayer] {
@@ -407,11 +408,15 @@ extension Knob {
             layerTwo.allowsEdgeAntialiasing = true
             layerTwo.lineCap = .round
             layerTwo.strokeStart = 0.0
-            layerTwo.strokeEnd = 1.0
-            layerTwo.strokeColor = UIColor.black.cgColor
             layerTwo.rasterizationScale = self.window?.windowScene?.screen.scale ?? UIScreen.main.scale
-        }
 
+            shadowLayer.shadowColor = UIColor.black.cgColor
+            shadowLayer.shadowRadius = 8.0
+            shadowLayer.shadowOpacity = 0.9
+            shadowLayer.shadowOffset = CGSize(width: 10, height: 10)
+            shadowLayer.path = layerTwo.path
+        }
+        self.layer.addSublayer(shadowLayer)
         self.layer.addSublayer(secondLayer)
 
         trackLayer.strokeEnd = 1.0
