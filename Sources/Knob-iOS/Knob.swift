@@ -407,6 +407,8 @@ extension Knob {
             layerTwo.allowsEdgeAntialiasing = true
             layerTwo.lineCap = .round
             layerTwo.strokeStart = 0.0
+            layerTwo.strokeEnd = 1.0
+            layerTwo.strokeColor = UIColor.black.cgColor
             layerTwo.rasterizationScale = self.window?.windowScene?.screen.scale ?? UIScreen.main.scale
         }
 
@@ -415,7 +417,6 @@ extension Knob {
         trackLayer.strokeEnd = 1.0
         progressLayer.strokeEnd = 0.0
         indicatorLayer.strokeEnd = 1.0
-        self.indicatorLayer.strokeColor = UIColor.black.cgColor
     }
 
     private func createRing() -> UIBezierPath {
